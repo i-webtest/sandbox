@@ -1,11 +1,35 @@
 "use strict";
 
-//УСЛОЖНЕННОЕ ЗАДАНИЕ
-let num = 266219;
-let num1 = Array.from(String(num), Number);
-let result = num1[0] * num1[1] * num1[2] * num1[3] * num1[4] * num1[5];
-result **= 3;
+//УСЛОЖНЕННОЕ ЗАДАНИЕ Урок №3
+let lang = "ru";
 
-console.log(num1);
-console.log(result);
-console.log(String(result).substring(0, 2));
+if (lang === "ru") {
+  console.log("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс");
+} else if (lang === "en") {
+  console.log("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+} else {
+  console.log("Oops!");
+}
+
+switch (lang) {
+  case "ru":
+    console.log("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс");
+    break;
+  case "en":
+    console.log("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+    break;
+  default:
+    console.log("Oops!");
+    break;
+}
+
+let langArr = {
+  ru: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+  en: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+};
+// langArr.ru = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+// langArr.en = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+console.log(langArr.ru);
+
+let namePerson = "Александр";
+console.log(namePerson === "Артем" ? "директор" : namePerson === "Александр" ? "преподаватель" : "студент");
