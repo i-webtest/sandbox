@@ -11,5 +11,9 @@
   "devel": true,
   "jquery": true,
   "esversion": 9,
+  "eqeqeq": true,
+  "latedef": true,
+  "noempty": true,
+  "funcscope": true,
   "node": true
 }
