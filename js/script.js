@@ -1,22 +1,67 @@
 "use strict";
 
-//--------------------------------------------------------Урок №4
-let title = prompt("Как называется ваш проект?", "КаЛьКулятор ВёРстки");
-let screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
-let screenPrice = +prompt("Сколько будет стоить данная работа?", 30000);
-let adaptive = confirm("Нужен ли адаптив на сайте?");
-let service1 = prompt("Какой дополнительный тип услуги нужен?", "слайдер");
-let servicePrice1 = +prompt("Сколько это будет стоить?", 2000);
-let service2 = prompt("Какой дополнительный тип услуги нужен?", "реклама");
-let servicePrice2 = +prompt("Сколько это будет стоить?", 1000);
+//--------------------------------------------------------Урок №5
+let title;
+let screens;
+let screenPrice;
+let adaptive;
 let rollback = 10;
-let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-let servicePercentPrice = fullPrice - fullPrice * (rollback / 100);
 let allServicePrices;
+let fullPrice;
+let servicePercentPrice;
+let service1;
+let service2;
+
+const isNumber = function (num) {
+  return !isNaN(parseFloat(num)) && isFinite(num);
+};
+
+const asking = function () {
+  title = prompt("Как называется ваш проект?", "КаЛьКулятор ВёРстки");
+  screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
+
+  do {
+    screenPrice = +prompt("Сколько будет стоить данная работа?");
+  } while (!isNumber(screenPrice));
+
+  adaptive = confirm("Нужен ли адаптив на сайте?");
+};
+
+const getAllServicePrices = function () {
+  let sum = 0;
+
+  for (let i = 0; i < 2; i++) {
+    if (i === 0) {
+      service1 = prompt("Какой дополнительный тип услуги нужен?", "слайдер");
+    } else if (i === 1) {
+      service2 = prompt("Какой дополнительный тип услуги нужен?", "реклама");
+    }
+
+    do {
+      sum = +prompt("Сколько это будет стоить?", 2000);
+    } while (!isNumber(sum));
+
+    sum += sum;
+  }
+
+  return sum;
+};
 
 const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
+
+const getFullPrice = function () {
+  return screenPrice + allServicePrices;
+};
+
+const getServicePercentPrices = function () {
+  return fullPrice - fullPrice * (rollback / 100);
+};
+
+function getTitle() {
+  return title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
+}
 
 const getRollbackMessage = function (price) {
   if (price >= 30000) {
@@ -30,42 +75,21 @@ const getRollbackMessage = function (price) {
   }
 };
 
-const getAllServicePrices = function () {
-  allServicePrices = servicePrice1 + servicePrice2;
-  return allServicePrices;
-};
-
-function getFullPrice() {
-  fullPrice = screenPrice + allServicePrices;
-  return fullPrice;
-}
-
-function getTitle() {
-  return title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
-}
-
-function getServicePercentPrices() {
-  return servicePercentPrice;
-}
+asking();
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice();
+servicePercentPrice = getServicePercentPrices();
+title = getTitle();
 
 showTypeOf(title);
 showTypeOf(screenPrice);
 showTypeOf(adaptive);
 
-console.log("Типы экранов: " + screens);
+console.log("allServicePrices", allServicePrices);
 console.log(getRollbackMessage(fullPrice));
+console.log(typeof title);
+console.log(typeof screenPrice);
+console.log(typeof adaptive);
+
+console.log(screens.length);
 console.log("Итоговая стоимость за вычетом процента отката: " + servicePercentPrice);
-
-// console.log("Итого: " + Math.ceil(servicePercentPrice));
-// console.log("Проект: " + getTitle(title));
-// console.log("Стоимость вёрстки экранов: " + screenPrice + " рублей");
-// console.log(adaptive);
-// console.log("Дополнительный тип услуги: " + service1);
-// console.log("Стоимость дополнительной услуги: " + servicePrice1);
-// console.log("Дополнительный тип услуги: " + service2);
-// console.log("Стоимость дополнительной услуги: " + servicePrice2);
-// console.log(screens.toLowerCase().split(screens));
-
-// console.log("Стоимость разработки сайта: " + fullPrice + " рублей");
-// console.log("Процент отката посреднику за работу: " + fullPrice * (rollback / 100));
-// console.log("Итоговая стоимость за вычетом процента отката: " + servicePercentPrice);
