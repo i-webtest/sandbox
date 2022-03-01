@@ -1,11 +1,51 @@
 "use strict";
 
-//УСЛОЖНЕННОЕ ЗАДАНИЕ
-let num = 266219;
-let num1 = Array.from(String(num), Number);
-let result = num1[0] * num1[1] * num1[2] * num1[3] * num1[4] * num1[5];
-result **= 3;
+//УРОК №6 "Загадывание случайного числа от 1 до 100"
 
-console.log(num1);
-console.log(result);
-console.log(String(result).substring(0, 2));
+let getRandomNumber = function () {
+  return Math.ceil(Math.random() * 100);
+};
+
+const isNumber = function (num) {
+  return !isNaN(parseFloat(num)) && isFinite(num);
+};
+
+const startGame = function () {
+  let randomNumber = getRandomNumber();
+
+  const game = function () {
+    let num = prompt("Угадайте число от 1 до 100");
+
+    if (num === null) {
+      alert("Игра окончена!");
+      return;
+    }
+
+    if (isNumber(num)) {
+      const numUser = +num;
+
+      if (numUser > randomNumber) {
+        alert("Загаданное число меньше");
+
+        game();
+      } else if (numUser < randomNumber) {
+        alert("Загаданное число больше");
+        game();
+      } else {
+        if (confirm("Поздравляю, Вы угадали!!!")) {
+          startGame();
+        } else {
+          alert("Игра окончена!");
+          return;
+        }
+      }
+    } else {
+      alert("Введите число!");
+      game();
+    }
+  };
+
+  game();
+};
+
+startGame();
